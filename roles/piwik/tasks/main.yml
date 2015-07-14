@@ -1,0 +1,23 @@
+- shell: if [ -e /opt/piwik ]; then echo yes; else echo no; fi;
+  register: version_exists
+  always_run: True
+
+- name: Download piwik zip
+  get_url:
+    url: http://builds.piwik.org/piwik.zip
+    dest: /tmp
+  when: version_exists.stdout == 'no'
+
+- name: Unarchive piwik zip
+  unarchive:
+    src: /tmp/piwik.zip
+    dest: /opt
+    copy: no
+  when: version_exists.stdout == 'no'
+
+- file:
+    path: /opt/piwik
+    state: directory
+    owner: www-data
+    group: www-data
+    recurse: yes

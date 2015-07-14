@@ -1,0 +1,9 @@
+---
+- name: Install Nginx
+  sudo: yes
+  apt: pkg=nginx state=latest  update_cache=yes cache_valid_time={{apt_cache_valid_time}}
+
+- name: Change default nginx site
+  sudo: yes
+  template: src=default.tpl dest=/etc/nginx/sites-available/default
+  notify: restart nginx

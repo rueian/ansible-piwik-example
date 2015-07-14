@@ -1,0 +1,23 @@
+---
+apt_cache_valid_time: 600
+
+server:
+  install: '1'
+  packages: [htop, vim, ntp, unzip]
+  timezone: Asia/Taipei
+  locale: zh_TW.UTF-8
+nginx:
+  install: '1'
+  docroot: /opt/piwik
+  servername: piwik.vb
+mysql:
+  install: '1'
+  root_password: piwikmysql
+  database: piwik
+  user: dbpiwik
+  password: dbpiwikpw
+  dump: ''
+php:
+  install: '1'
+  ppa: php5-5.6
+  packages: [php5-cli, php5-intl, php5-mcrypt, php5-curl, php5-gd, php5-geoip, php5-mysql]
